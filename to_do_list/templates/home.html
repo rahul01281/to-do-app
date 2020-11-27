@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<body style="background:#86a7c2;">
+    <div class="container">
+        <div class="card" style="margin-top:50px">
+            <div class="card-body">
+                <h1>Tasks</h1>
+                <div class="form-group">
+                    <form method="POST" action="/">
+                        {{form.title}}
+                        {% csrf_token %}
+                        <br>
+                        <button class="btn btn-primary">Create</button>
+                    </form>
+                </div>
+                
+                {% for task in tasks %}
+           
+                <div class="card">
+                    <div class="card-body">
+                        {% if task.completed %}
+                        <strike>
+                            <p>{{task}}</p>
+                        </strike>
+                        {% else %}
+                        <p>{{task}}</p>
+                        {% endif %}
+                        <a href="{% url 'edit' task.id %}">Edit</a>&nbsp;
+                        <a href="{% url 'delete' task.id %}">Delete</a>
+                    </div>
+                </div>
+                <br>
+                {% endfor %}
+            </div>
+        </div>     
+        
+    </div>
+</body>
+
+
+
